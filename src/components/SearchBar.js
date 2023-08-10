@@ -6,25 +6,27 @@ const SearchBar = () => {
 
   console.log(search);
 
-  const handleNewSearche = (e) => {
+  const handleNewSearch = (e) => {
     let query = e.target.value;
     setSearch(query);
   };
 
   return (
     <>
-      <Container
-        maxWidth="md"
-        sx={{ pt: 10, pb: 10 }}
-      >
+      <Container maxWidth="xl" sx={{ pt: 10, pb: 10 }}>
         <form>
           <TextField
-            onChange={handleNewSearche}
+            onChange={handleNewSearch}
             value={search}
             type="search"
             id="search"
             label="Search"
-            sx={{ width: 600 }}
+            sx={{
+              width: {
+                xs: "100%",
+                sm: 600,
+              },
+            }}
           />
         </form>
       </Container>
