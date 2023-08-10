@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Container, TextField } from "@mui/material";
+import { Container, TextField, Button } from "@mui/material";
 
 const SearchBar = () => {
   const [search, setSearch] = useState("");
@@ -28,6 +28,10 @@ const SearchBar = () => {
               },
             }}
           />
+          <br />
+          <Button sx={{ mt: 5, mb: 5 }} variant="outlined">
+            Search
+          </Button>
         </form>
       </Container>
     </>
