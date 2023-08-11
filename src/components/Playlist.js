@@ -1,8 +1,9 @@
+import { Container, borders } from '@mui/material'
 import React from 'react'
 
 const Playlist = () => {
   return (
-    <div>Playlist</div>
+    <Container sx={{borderColor: 'secondary.main', borderRadius: 1 }}>Playlist</Container>
   )
 }
 
