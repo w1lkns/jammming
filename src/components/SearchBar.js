@@ -1,23 +1,27 @@
 import React, { useState } from "react";
 import { Container, TextField, Button } from "@mui/material";
-import songs from "../songs";
 
-const SearchBar = () => {
+const SearchBar = ({onSearch}) => {
   const [search, setSearch] = useState("");
 
   console.log(search);
 
-  const handleNewSearch = (e) => {
+  const handleNewQuery = (e) => {
     let query = e.target.value;
     setSearch(query);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSearch(search)
   };
 
   return (
     <>
       <Container maxWidth="xl" sx={{ pt: 10, pb: 10 }}>
-        <form>
+        <form onSubmit={handleSubmit}>
           <TextField
-            onChange={handleNewSearch}
+            onChange={handleNewQuery}
             value={search}
             type="search"
             id="search"
@@ -30,7 +34,7 @@ const SearchBar = () => {
             }}
           />
           <br />
-          <Button sx={{ mt: 5, mb: 5 }} variant="outlined">
+          <Button type="submit" sx={{ mt: 5, mb: 5 }} variant="outlined">
             Search
           </Button>
         </form>
