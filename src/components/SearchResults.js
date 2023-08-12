@@ -2,12 +2,10 @@ import { Container } from "@mui/material";
 import Track from "./Track";
 import React from "react";
 
-const SearchResults = ({ results }) => {
+const SearchResults = ({ results, playlistTracks }) => {
   console.log(results);
   return (
-    <Container
-      sx={{ border: 1, borderColor: "#191414", borderRadius: 1 }}
-    >
+    <Container sx={{ border: 1, borderColor: "#191414", borderRadius: 1 }}>
       <h1>Search Results</h1>
       <div>
         {results.length === 0 ? (
@@ -22,6 +20,9 @@ const SearchResults = ({ results }) => {
               artist={song.artist}
               cover={song.cover}
               showAddButton={true}
+              isInPlaylist={playlistTracks.some(
+                (track) => track.id === song.id
+              )}
             />
           ))
         )}

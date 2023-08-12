@@ -23,9 +23,9 @@ function Track({
         color: "#FFF",
         display: "flex",
         flexDirection: { xs: "column-reverse", sm: "row" },
-        height: { xs: "auto", sm: "auto" },
-        width: { xs: "100%", sm: 400 },
-        margin: { xs: 2, sm: 2 },
+        height: { xs: "auto", sm: "auto", md: "auto" },
+        width: { xs: "auto", sm: "auto", md: "auto" },
+        margin: { xs: 1, sm: 2, md: 2 },
       }}
     >
       <CardMedia
@@ -35,6 +35,7 @@ function Track({
           height: 151,
           m: { xs: 2, sm: 2 },
           order: { xs: 2, sm: 1 },
+          display: { xs: "none", sm: "none", md: "block" },
         }}
         image={cover}
         alt={`${name} album cover`}
@@ -65,7 +66,7 @@ function Track({
           </Typography>
           <Typography>
             <Box mt={3}>
-              {showAddButton && (
+              {!isInPlaylist && showAddButton && (
                 <Button
                   style={{ color: "white" }}
                   size="small"
