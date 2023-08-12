@@ -6,6 +6,8 @@ import SearchResults from "./components/SearchResults";
 import { useState } from "react";
 import songs from "./songs";
 import Playlist from "./components/Playlist";
+import Alert from "@mui/material/Alert";
+import { Box } from "@mui/material";
 
 function App() {
   const tracks = [
@@ -35,6 +37,8 @@ function App() {
   const [searchResults, setSearchResults] = useState([]);
   const [playlistName, setPlaylistName] = useState("Playlist x Defecto");
   const [playlistTracks, setPlaylistTracks] = useState(tracks);
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
 
   const handleSearch = (query) => {
     const results = query
@@ -48,7 +52,11 @@ function App() {
 
   const addingTrack = (track) => {
     setPlaylistTracks([track, ...playlistTracks]);
-    alert(`Added ${track.name}`);
+    setAlertMessage(`${track.name} added to the playlist!`);
+    setShowAlert(true);
+    setTimeout(() => {
+      setShowAlert(false);
+    }, 2000);
   };
   const deleteTrack = (track) => {
     setPlaylistTracks([track, ...playlistTracks]);
@@ -58,6 +66,21 @@ function App() {
     <div className="App">
       <Header />
       <SearchBar onSearch={handleSearch} />
+      {showAlert && (
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            width: "100%",
+            margin: "10px",
+          }}
+        >
+          <Alert sx={{ width: "50%" }} severity="success">
+            {alertMessage}
+          </Alert>
+        </Box>
+      )}
       <Grid container spacing={2} justifyContent="center">
         <Grid item xs={5}>
           <SearchResults
