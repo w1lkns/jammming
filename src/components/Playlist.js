@@ -1,15 +1,31 @@
-import { Container, Button } from "@mui/material";
-import { React } from "react";
+import { Container, Button, TextField } from "@mui/material";
+import { React, useState } from "react";
 import Tracklist from "./Tracklist";
 
-const Playlist = ({id, name, playlistTracks, deleteTrack }) => {
+const Playlist = ({ name, playlistTracks, deleteTrack }) => {
+  const [listName, setListName] = useState();
   const handleAdd = (e) => {
     e.preventDefault();
   };
 
+  const handleNewPlaylistName = (e) => {
+    const newName = e.target.value;
+    //console.log(newName);
+    setListName(newName);
+  };
+
   return (
     <Container sx={{ border: 1, borderColor: "#191414", borderRadius: 1 }}>
-      <h1>{name}</h1>
+      <h1>
+        <TextField
+          onChange={handleNewPlaylistName}
+          type="text"
+          id="standard-basic"
+          label="Playlist Name"
+          variant="standard"
+          value={listName}
+        />
+      </h1>
       <h4>
         <Tracklist songs={playlistTracks} deleteTrack={deleteTrack} />
       </h4>

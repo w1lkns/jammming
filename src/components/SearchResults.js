@@ -3,7 +3,7 @@ import Track from "./Track";
 import React from "react";
 
 const SearchResults = ({ results, playlistTracks, addTrack }) => {
-  console.log(results);
+  //console.log(results);
   return (
     <Container sx={{ border: 1, borderColor: "#191414", borderRadius: 1 }}>
       <h1>Search Results</h1>

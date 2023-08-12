@@ -4,7 +4,7 @@ import { Container, TextField, Button } from "@mui/material";
 const SearchBar = ({onSearch}) => {
   const [search, setSearch] = useState("");
 
-  console.log(search);
+  //console.log(search);
 
   const handleNewQuery = (e) => {
     let query = e.target.value;

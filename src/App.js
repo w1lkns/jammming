@@ -35,7 +35,7 @@ function App() {
   ];
 
   const [searchResults, setSearchResults] = useState([]);
-  const [playlistName, setPlaylistName] = useState("Playlist x Defecto");
+  const [playlistName, setPlaylistName] = useState("");
   const [playlistTracks, setPlaylistTracks] = useState(tracks);
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
@@ -56,17 +56,17 @@ function App() {
     setShowAlert(true);
     setTimeout(() => {
       setShowAlert(false);
-    }, 2000);
+    }, 2500);
   };
 
   const deleteTrack = (trackToDelete) => {
-    console.log("deleting", trackToDelete);
+    //console.log("deleting", trackToDelete);
 
     const newArray = playlistTracks.filter(
       (track) => track.id !== trackToDelete.id
     );
 
-    console.log("New array:", newArray);
+    //console.log("New array:", newArray);
 
     setPlaylistTracks(newArray);
 
@@ -74,7 +74,7 @@ function App() {
     setShowAlert(true);
     setTimeout(() => {
       setShowAlert(false);
-    }, 2000);
+    }, 2500);
   };
 
   return (
