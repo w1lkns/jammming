@@ -58,8 +58,23 @@ function App() {
       setShowAlert(false);
     }, 2000);
   };
-  const deleteTrack = (track) => {
-    setPlaylistTracks([track, ...playlistTracks]);
+
+  const deleteTrack = (trackToDelete) => {
+    console.log("deleting", trackToDelete);
+
+    const newArray = playlistTracks.filter(
+      (track) => track.id !== trackToDelete.id
+    );
+
+    console.log("New array:", newArray);
+
+    setPlaylistTracks(newArray);
+
+    setAlertMessage(`${trackToDelete.name} was deleted from the playlist!`);
+    setShowAlert(true);
+    setTimeout(() => {
+      setShowAlert(false);
+    }, 2000);
   };
 
   return (
@@ -90,7 +105,11 @@ function App() {
           />
         </Grid>
         <Grid item xs={5}>
-          <Playlist name={playlistName} playlistTracks={playlistTracks} />
+          <Playlist
+            name={playlistName}
+            playlistTracks={playlistTracks}
+            deleteTrack={deleteTrack}
+          />
         </Grid>
       </Grid>
     </div>

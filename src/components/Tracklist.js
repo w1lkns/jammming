@@ -2,7 +2,7 @@ import React from "react";
 import { Container } from "@mui/material";
 import Track from "./Track";
 
-const Tracklist = ({ songs }) => {
+const Tracklist = ({ songs, deleteTrack }) => {
   //console.log(songs);
 
   return (
@@ -16,9 +16,11 @@ const Tracklist = ({ songs }) => {
           songs.map((song) => (
             <Track
               key={song.id}
+              id={song.id}
               name={song.name}
               artist={song.artist}
               cover={song.cover}
+              deleteTrack={deleteTrack}
               showRemoveButton={true}
             />
           ))
