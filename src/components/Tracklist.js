@@ -19,6 +19,7 @@ const Tracklist = ({ songs }) => {
               name={song.name}
               artist={song.artist}
               cover={song.cover}
+              showRemoveButton={true}
             />
           ))
         )}

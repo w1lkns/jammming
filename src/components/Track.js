@@ -4,8 +4,18 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
+import { Button } from "@mui/material";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 
-function Track({ name, artist, cover }) {
+function Track({
+  name,
+  artist,
+  cover,
+  showAddButton,
+  showRemoveButton,
+  isInPlaylist,
+}) {
   return (
     <Card
       sx={{
@@ -13,7 +23,7 @@ function Track({ name, artist, cover }) {
         color: "#FFF",
         display: "flex",
         flexDirection: { xs: "column-reverse", sm: "row" },
-        height: { xs: "auto", sm: "auto" }, // Adjusted to "auto" to accommodate varying text heights
+        height: { xs: "auto", sm: "auto" },
         width: { xs: "100%", sm: 400 },
         margin: { xs: 2, sm: 2 },
       }}
@@ -52,6 +62,24 @@ function Track({ name, artist, cover }) {
             component="div"
           >
             {artist}
+          </Typography>
+          <Typography>
+            <Box mt={3}>
+              {showAddButton && (
+                <Button
+                  style={{ color: "white" }}
+                  size="small"
+                  endIcon=<AddCircleIcon />
+                ></Button>
+              )}
+              {showRemoveButton && (
+                <Button
+                  style={{ color: "white" }}
+                  size="small"
+                  endIcon=<RemoveCircleIcon />
+                ></Button>
+              )}
+            </Box>
           </Typography>
         </CardContent>
       </Box>

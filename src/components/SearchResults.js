@@ -21,6 +21,7 @@ const SearchResults = ({ results }) => {
               name={song.name}
               artist={song.artist}
               cover={song.cover}
+              showAddButton={true}
             />
           ))
         )}
