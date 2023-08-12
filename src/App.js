@@ -46,6 +46,14 @@ function App() {
     setSearchResults(results);
   };
 
+  const addingTrack = (track) => {
+    setPlaylistTracks([track, ...playlistTracks]);
+    alert(`Added ${track.name}`);
+  };
+  const deleteTrack = (track) => {
+    setPlaylistTracks([track, ...playlistTracks]);
+  };
+
   return (
     <div className="App">
       <Header />
@@ -55,6 +63,7 @@ function App() {
           <SearchResults
             results={searchResults}
             playlistTracks={playlistTracks}
+            addTrack={addingTrack}
           />
         </Grid>
         <Grid item xs={5}>

@@ -2,7 +2,7 @@ import { Container } from "@mui/material";
 import Track from "./Track";
 import React from "react";
 
-const SearchResults = ({ results, playlistTracks }) => {
+const SearchResults = ({ results, playlistTracks, addTrack }) => {
   console.log(results);
   return (
     <Container sx={{ border: 1, borderColor: "#191414", borderRadius: 1 }}>
@@ -16,9 +16,11 @@ const SearchResults = ({ results, playlistTracks }) => {
           results.map((song) => (
             <Track
               key={song.id}
+              id={song.id}
               name={song.name}
               artist={song.artist}
               cover={song.cover}
+              addSong={addTrack}
               showAddButton={true}
               isInPlaylist={playlistTracks.some(
                 (track) => track.id === song.id

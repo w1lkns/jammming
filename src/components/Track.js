@@ -9,13 +9,22 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 
 function Track({
+  id,
   name,
   artist,
   cover,
+  addSong,
   showAddButton,
   showRemoveButton,
   isInPlaylist,
 }) {
+  const handleAddTrack = () => {
+    addSong({ id, name, artist, cover });
+  };
+  const handleDeleteTrack = () => {
+    addSong({ id, name, artist, cover });
+  };
+
   return (
     <Card
       sx={{
@@ -68,6 +77,7 @@ function Track({
             <Box mt={3}>
               {!isInPlaylist && showAddButton && (
                 <Button
+                  onClick={handleAddTrack}
                   style={{ color: "white" }}
                   size="small"
                   endIcon=<AddCircleIcon />
@@ -75,6 +85,7 @@ function Track({
               )}
               {showRemoveButton && (
                 <Button
+                  onClick={handleDeleteTrack}
                   style={{ color: "white" }}
                   size="small"
                   endIcon=<RemoveCircleIcon />
