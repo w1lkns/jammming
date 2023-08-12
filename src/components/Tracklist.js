@@ -1,20 +1,28 @@
 import React from "react";
-import { Button, Container } from "@mui/material";
+import { Container } from "@mui/material";
+import Track from "./Track";
 
-const Tracklist = () => {
-  const handleAdd = (e) => {
-    e.preventDefault();
-  };
+const Tracklist = ({ songs }) => {
+  //console.log(songs);
+
   return (
-    <Container
-      sx={{ border: 1, borderColor: "#191414", borderRadius: 1 }}
-    >
-      <h1>Tracklist</h1>
-      <form onSubmit={handleAdd}>
-        <Button type="submit" sx={{ mt: 5, mb: 5 }} variant="outlined">
-          SAVE TO SPOTIFY
-        </Button>
-      </form>
+    <Container>
+      <div>
+        {songs.length === 0 ? (
+          <>
+            <p>No songs in the playlist!</p>
+          </>
+        ) : (
+          songs.map((song) => (
+            <Track
+              key={song.id}
+              name={song.name}
+              artist={song.artist}
+              cover={song.cover}
+            />
+          ))
+        )}
+      </div>
     </Container>
   );
 };
