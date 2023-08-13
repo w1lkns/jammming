@@ -89,9 +89,12 @@ function App() {
       localStorage.setItem('expires_in', expires_in);
       localStorage.setItem('token_type', token_type);
     }
-  });
+  }, []);
 
   const handleSearch = (query) => {
+
+    fetch('https://api.spotify.com/v1/search?', query)
+
     const results = query
       ? songs.filter((song) =>
           song.name.toLowerCase().includes(query.toLowerCase())

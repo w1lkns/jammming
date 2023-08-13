@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Container, TextField, Button } from "@mui/material";
 
-const SearchBar = ({onSearch}) => {
+const SearchBar = ({ onSearch }) => {
   const [search, setSearch] = useState("");
 
   //console.log(search);
@@ -13,7 +13,7 @@ const SearchBar = ({onSearch}) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSearch(search)
+    onSearch(search);
   };
 
   return (
