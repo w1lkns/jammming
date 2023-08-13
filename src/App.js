@@ -3,11 +3,41 @@ import Header from "./components/Header";
 import SearchBar from "./components/SearchBar";
 import Grid from "@mui/material/Grid";
 import SearchResults from "./components/SearchResults";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import songs from "./songs";
 import Playlist from "./components/Playlist";
 import Alert from "@mui/material/Alert";
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
+
+// https://example.com/callback#access_token=NwAExz...BV3O2Tk&token_type=Bearer&expires_in=3600&state=123
+
+let CLIENT_ID = "c5f2daf9aa8640dfbd0a332252d4c737";
+let SPOTIFY_AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
+let URL_REDIRECT_AFTER_AUTH = "http://localhost:3000";
+const SCOPE = ["playlist-modify-private"].join(" ");
+const expiration = 3600;
+
+//let state = generateRandomString(16);
+
+SPOTIFY_AUTH_ENDPOINT += "?response_type=token";
+SPOTIFY_AUTH_ENDPOINT += "&client_id=" + encodeURIComponent(CLIENT_ID);
+SPOTIFY_AUTH_ENDPOINT += "&scope=" + encodeURIComponent(SCOPE);
+SPOTIFY_AUTH_ENDPOINT +=
+  "&redirect_uri=" + encodeURIComponent(URL_REDIRECT_AFTER_AUTH);
+//SPOTIFY_AUTH_ENDPOINT += '&state=' + encodeURIComponent(state);
+SPOTIFY_AUTH_ENDPOINT += "&expires_in=" + encodeURIComponent(expiration);
+
+// http://localhost:3000/#access_token=BQDZfwJ1uWc2t2-YA6JP6VqkljNWKLkp2cMr8_ZbJ6W1lk-2DmvUj0scKec4VWAjgHhUTs6V3yL0OOLjy_cKYw3QEanx0lBbTGlStgRnNoVFL3APFs5-20AjnXSMshsNiwY5D2qAONYh67CYNz_5jrJeutI4L3aLpfxYPkE9HNJXpB2jsJuRFF0ALa215Ci7FX5hc-bR6VZAR6A&token_type=Bearer&expires_in=3600
+
+const getReturnedPAramsFromSpotifyAuth = (hash) => {
+  const stringAfterHashtag = hash.substring(1);
+  const paramsInURL = stringAfterHashtag.split("&");
+  return paramsInURL.reduce((acc, current) => {
+    const [key, value] = current.split("=");
+    acc[key] = value;
+    return acc;
+  }, {});
+};
 
 function App() {
   const tracks = [
@@ -39,6 +69,27 @@ function App() {
   const [playlistTracks, setPlaylistTracks] = useState(tracks);
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const handleLogin = () => {
+    window.location = `${SPOTIFY_AUTH_ENDPOINT}`;
+    //console.log(window.location);
+    setIsLoggedIn(true);
+  };
+
+
+  useEffect(() => {
+    if (window.location.hash) {
+      const { access_token, expires_in, token_type } =
+        getReturnedPAramsFromSpotifyAuth(window.location.hash);
+      //console.log({ access_token, expires_in, token_type });
+
+      localStorage.clear();
+      localStorage.setItem('access_token', access_token);
+      localStorage.setItem('expires_in', expires_in);
+      localStorage.setItem('token_type', token_type);
+    }
+  });
 
   const handleSearch = (query) => {
     const results = query
@@ -80,6 +131,9 @@ function App() {
   return (
     <div className="App">
       <Header />
+      <Button onClick={handleLogin}>
+        {!isLoggedIn ? "Login to Spotify" : "Logged to Spotify"}
+      </Button>
       <SearchBar onSearch={handleSearch} />
       {showAlert && (
         <Box
