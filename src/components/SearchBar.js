@@ -8,6 +8,7 @@ const SearchBar = ({ onSearch }) => {
 
   const handleNewQuery = (e) => {
     let query = e.target.value;
+    console.log(query);
     setSearch(query);
   };
 

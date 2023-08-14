@@ -4,14 +4,14 @@ import SearchBar from "./components/SearchBar";
 import Grid from "@mui/material/Grid";
 import SearchResults from "./components/SearchResults";
 import { useEffect, useState } from "react";
-import songs from "./songs";
+//import songs from "./songs";
 import Playlist from "./components/Playlist";
 import Alert from "@mui/material/Alert";
 import { Box, Button } from "@mui/material";
 
 // https://example.com/callback#access_token=NwAExz...BV3O2Tk&token_type=Bearer&expires_in=3600&state=123
 
-let CLIENT_ID = "c5f2daf9aa8640dfbd0a332252d4c737";
+let CLIENT_ID = process.env.CLIENT_ID;
 let SPOTIFY_AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
 let URL_REDIRECT_AFTER_AUTH = "http://localhost:3000";
 const SCOPE = ["playlist-modify-private"].join(" ");
@@ -77,7 +77,6 @@ function App() {
     setIsLoggedIn(true);
   };
 
-
   useEffect(() => {
     if (window.location.hash) {
       const { access_token, expires_in, token_type } =
@@ -85,23 +84,32 @@ function App() {
       //console.log({ access_token, expires_in, token_type });
 
       localStorage.clear();
-      localStorage.setItem('access_token', access_token);
-      localStorage.setItem('expires_in', expires_in);
-      localStorage.setItem('token_type', token_type);
+      localStorage.setItem("access_token", access_token);
+      localStorage.setItem("expires_in", expires_in);
+      localStorage.setItem("token_type", token_type);
     }
   }, []);
 
   const handleSearch = (query) => {
+    const accessToken = localStorage.getItem("access_token");
 
-    fetch('https://api.spotify.com/v1/search?', query)
+    fetch(`https://api.spotify.com/v1/search?q=${query}&type=track`, {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    }).then((response) => {
+      console.log(response);
+      response.json().then((data) => {
+        const tracks = data.tracks.items;
+        console.log(tracks);
+        setSearchResults(tracks);
+      });
+    });
 
-    const results = query
+    /*const results = query
       ? songs.filter((song) =>
           song.name.toLowerCase().includes(query.toLowerCase())
         )
       : songs;
-
-    setSearchResults(results);
+    */
   };
 
   const addingTrack = (track) => {
