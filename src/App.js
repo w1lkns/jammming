@@ -11,7 +11,9 @@ import { Box, Button } from "@mui/material";
 
 // https://example.com/callback#access_token=NwAExz...BV3O2Tk&token_type=Bearer&expires_in=3600&state=123
 
-let CLIENT_ID = process.env.CLIENT_ID;
+console.log("CLIENT_ID:", process.env.REACT_APP_CLIENT_ID);
+
+let CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
 let SPOTIFY_AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
 let URL_REDIRECT_AFTER_AUTH = "http://localhost:3000";
 const SCOPE = ["playlist-modify-private"].join(" ");
