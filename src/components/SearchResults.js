@@ -3,9 +3,16 @@ import Track from "./Track";
 import React from "react";
 
 const SearchResults = ({ results, playlistTracks, addTrack }) => {
-  console.log(results);
+  //console.log(results);
   return (
-    <Container sx={{ border: 1, borderColor: "#191414", borderRadius: 1 }}>
+    <Container
+      sx={{
+        border: 1,
+        borderColor: "#191414",
+        borderRadius: 1,
+        backgroundColor: "#D0F0C0",
+      }}
+    >
       <h1>Search Results</h1>
       <div>
         {results.length === 0 ? (
@@ -20,6 +27,7 @@ const SearchResults = ({ results, playlistTracks, addTrack }) => {
               name={song.name}
               artist={song.artists[0].name}
               cover={song.album.images[1].url}
+              uri={song.artists[0].uri}
               addSong={addTrack}
               showAddButton={true}
               isInPlaylist={playlistTracks.some(

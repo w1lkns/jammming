@@ -13,6 +13,7 @@ function Track({
   name,
   artist,
   cover,
+  uri,
   addSong,
   deleteTrack,
   showAddButton,
@@ -20,10 +21,10 @@ function Track({
   isInPlaylist,
 }) {
   const handleAddTrack = () => {
-    addSong({ id, name, artist, cover });
+    addSong({ id, name, artist, cover, uri });
   };
   const handleDeleteTrack = () => {
-    deleteTrack({ id, name, artist, cover });
+    deleteTrack({ id, name, artist, cover, uri });
   };
 
   return (

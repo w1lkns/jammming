@@ -26,7 +26,7 @@ const SearchBar = ({ onSearch }) => {
             value={search}
             type="search"
             id="search"
-            label="Search"
+            label="Search Songs"
             sx={{
               width: {
                 xs: "100%",

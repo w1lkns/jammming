@@ -36,7 +36,7 @@ const getReturnedPAramsFromSpotifyAuth = (hash) => {
 };
 
 function App() {
-  const tracks = [
+  /*const tracks = [
     {
       id: 1,
       name: "Shape of You",
@@ -58,15 +58,18 @@ function App() {
       album: "Led Zeppelin IV",
       cover: "https://i.scdn.co/image/ab67616d0000b273cd25ce73e3eddeedb995fcee",
     },
-  ];
+  ];*/
 
   const [searchResults, setSearchResults] = useState([]);
   const [playlistName, setPlaylistName] = useState("");
-  const [playlistTracks, setPlaylistTracks] = useState(tracks);
+  const [playlistTracks, setPlaylistTracks] = useState([]);
   const [alertSeverity, setAlertSeverity] = useState("success");
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [uriPlaylist, setUriPlaylist] = useState([]);
+
+  console.log(playlistName);
 
   const handleLogin = () => {
     window.location = `${SPOTIFY_AUTH_ENDPOINT}`;
@@ -110,10 +113,10 @@ function App() {
     fetch(`https://api.spotify.com/v1/search?q=${query}&type=track`, {
       headers: { Authorization: `Bearer ${accessToken}` },
     }).then((response) => {
-      console.log(response);
+      //console.log(response);
       response.json().then((data) => {
+        console.log(data.tracks.items);
         const tracks = data.tracks.items;
-        //console.log(tracks.slice(10));
         setSearchResults(tracks.slice(0, 10));
       });
     });
@@ -128,6 +131,7 @@ function App() {
 
   const addingTrack = (track) => {
     setPlaylistTracks([track, ...playlistTracks]);
+    setUriPlaylist([track.uri, ...uriPlaylist]);
     setAlertMessage(`${track.name} added to the playlist!`);
     setShowAlert(true);
     setTimeout(() => {
@@ -185,8 +189,10 @@ function App() {
         </Grid>
         <Grid item xs={5}>
           <Playlist
-            name={playlistName}
+            playlistName={playlistName}
+            setPlaylistName={setPlaylistName}
             playlistTracks={playlistTracks}
+            uriPlaylist={uriPlaylist}
             deleteTrack={deleteTrack}
           />
         </Grid>
