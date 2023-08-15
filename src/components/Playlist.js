@@ -1,5 +1,5 @@
 import { Container, Button, TextField } from "@mui/material";
-import { React, useState } from "react";
+import { React } from "react";
 import Tracklist from "./Tracklist";
 
 const Playlist = ({
@@ -46,7 +46,12 @@ const Playlist = ({
         />
       </h4>
       <form onSubmit={handleAdd}>
-        <Button type="submit" sx={{ mt: 5, mb: 5 }} variant="outlined">
+        <Button
+          type="submit"
+          
+          sx={{ mt: 5, mb: 5 }}
+          variant="contained"
+        >
           SAVE TO SPOTIFY
         </Button>
       </form>

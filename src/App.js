@@ -69,7 +69,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [uriPlaylist, setUriPlaylist] = useState([]);
 
-  console.log(playlistName);
+  //console.log(playlistName);
 
   const handleLogin = () => {
     window.location = `${SPOTIFY_AUTH_ENDPOINT}`;

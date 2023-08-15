@@ -3,8 +3,8 @@ import { Container } from "@mui/material";
 import Track from "./Track";
 
 const Tracklist = ({ uriPlaylist, playlistTracks, deleteTrack }) => {
-  console.log(playlistTracks);
-  console.log(uriPlaylist);
+  //console.log(playlistTracks);
+  //console.log(uriPlaylist);
 
   return (
     <Container>
