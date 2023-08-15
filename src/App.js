@@ -166,7 +166,6 @@ function App() {
     })
       .then((response) => response.json())
       .then((data) => {
-        // Handle the data here
         const uid = data.id;
 
         return fetch(`https://api.spotify.com/v1/users/${uid}/playlists`, {
@@ -177,21 +176,44 @@ function App() {
           method: "POST",
           body: JSON.stringify({
             name: playlistName,
-            description: "custom playlist generated from webapp by @w1lkns",
+            description: "Custom playlist generated from webapp by @w1lkns",
             public: true,
           }),
-        });
+        })
+          .then((response) => response.json())
+          .then((playlistData) => {
+            // Returning uid and playlistData together
+            return { uid, playlistData };
+          });
       })
-      .then((response) => {
-        console.log("raw data", response);
-        return response.json();
+      .then(({ uid, playlistData }) => {
+        console.log("raw data", playlistData);
+        const playlistId = playlistData.id;
+
+        console.log(uriPlaylist);
+
+        return fetch(
+          `https://api.spotify.com/v1/users/${uid}/playlists/${playlistId}/tracks`,
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              "Content-Type": "application/json",
+            },
+            method: "POST",
+            body: JSON.stringify({
+              uris: uriPlaylist,
+            }),
+          }
+        );
       })
+      .then((response) => response.json())
       .then((data) => {
-        // Handle the playlist creation data here
+        // Handle the response from adding tracks
+        console.log("Tracks added:", data);
       })
       .catch((error) => {
         // Handle any errors here
-        console.log(error.message);
+        console.error("error adding tracks", error.message);
       });
   };
 
