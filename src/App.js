@@ -12,7 +12,7 @@ import { Box, Button } from "@mui/material";
 let CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
 let SPOTIFY_AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
 let URL_REDIRECT_AFTER_AUTH = "http://localhost:3000";
-const SCOPE = ["playlist-modify-private"].join(" ");
+const SCOPE = ["playlist-modify-public"].join(" ");
 const expiration = 3600;
 
 //let state = generateRandomString(16);
@@ -157,10 +157,48 @@ function App() {
     }, 2500);
   };
 
+  const handleSavePlaylist = () => {
+    const accessToken = localStorage.getItem("access_token");
+
+    // fetches user's ID
+    fetch(`https://api.spotify.com/v1/me`, {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // Handle the data here
+        const uid = data.id;
+
+        return fetch(`https://api.spotify.com/v1/users/${uid}/playlists`, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "Content-Type": "application/json",
+          },
+          method: "POST",
+          body: JSON.stringify({
+            name: playlistName,
+            description: "custom playlist generated from webapp by @w1lkns",
+            public: true,
+          }),
+        });
+      })
+      .then((response) => {
+        console.log("raw data", response);
+        return response.json();
+      })
+      .then((data) => {
+        // Handle the playlist creation data here
+      })
+      .catch((error) => {
+        // Handle any errors here
+        console.log(error.message);
+      });
+  };
+
   return (
     <div className="App">
       <Header />
-      <Button onClick={handleLogin}>
+      <Button sx={{ mt: 5, mb: 5 }} onClick={handleLogin} variant="contained">
         {!isLoggedIn ? "Login to Spotify" : "Logged to Spotify"}
       </Button>
       <SearchBar onSearch={handleSearch} />
@@ -194,6 +232,7 @@ function App() {
             playlistTracks={playlistTracks}
             uriPlaylist={uriPlaylist}
             deleteTrack={deleteTrack}
+            handleSavePlaylist={handleSavePlaylist}
           />
         </Grid>
       </Grid>

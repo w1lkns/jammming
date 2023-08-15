@@ -4,6 +4,7 @@ import Tracklist from "./Tracklist";
 
 const Playlist = ({
   playlistName,
+  handleSavePlaylist,
   setPlaylistName,
   playlistTracks,
   deleteTrack,
@@ -47,8 +48,8 @@ const Playlist = ({
       </h4>
       <form onSubmit={handleAdd}>
         <Button
+          onClick={handleSavePlaylist}
           type="submit"
-          
           sx={{ mt: 5, mb: 5 }}
           variant="contained"
         >
