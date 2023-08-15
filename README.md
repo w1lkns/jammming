@@ -46,6 +46,7 @@ To connect to the Spotify API, you'll need to generate an API key. Follow these 
 
 ```env
 REACT_APP_SPOTIFY_CLIENT_ID=Your-Client-ID-Here
+```
 
 Replace Your-Client-ID-Here with your actual credentials.
 
