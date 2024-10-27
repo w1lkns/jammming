@@ -41,11 +41,12 @@ Allows users to view and manage their custom playlist, including naming the play
 To connect to the Spotify API, you'll need to generate an API key. Follow these steps:
 
 1. Visit [Spotify Developer Dashboard](https://developer.spotify.com/dashboard/applications).
-2. Create a new application and obtain the `Client ID` and `Client Secret`.
+2. Create a new application and obtain the `Client ID`.
 3. Create a `.env` file in the root of your project and add the following lines:
 
 ```env
 REACT_APP_SPOTIFY_CLIENT_ID=Your-Client-ID-Here
+```
 
 Replace Your-Client-ID-Here with your actual credentials.
 
