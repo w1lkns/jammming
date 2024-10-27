@@ -36,30 +36,6 @@ const getReturnedPAramsFromSpotifyAuth = (hash) => {
 };
 
 function App() {
-  /*const tracks = [
-    {
-      id: 1,
-      name: "Shape of You",
-      artist: "Ed Sheeran",
-      album: "÷ (Deluxe)",
-      cover: "https://i.scdn.co/image/ab67616d0000b273ba5db46f4b838ef6027e6f96",
-    },
-    {
-      id: 2,
-      name: "Blinding Lights",
-      artist: "The Weeknd",
-      album: "After Hours",
-      cover: "https://i.scdn.co/image/ab67616d0000b2738863bc11d2aa12b54f5aeb36",
-    },
-    {
-      id: 3,
-      name: "Stairway to Heaven",
-      artist: "Led Zeppelin",
-      album: "Led Zeppelin IV",
-      cover: "https://i.scdn.co/image/ab67616d0000b273cd25ce73e3eddeedb995fcee",
-    },
-  ];*/
-
   const [searchResults, setSearchResults] = useState([]);
   const [playlistName, setPlaylistName] = useState("");
   const [playlistTracks, setPlaylistTracks] = useState([]);
@@ -220,8 +196,13 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <Button sx={{ mt: 5, mb: 5 }} onClick={handleLogin} variant="contained">
-        {!isLoggedIn ? "Login to Spotify" : "Logged to Spotify"}
+      <Button
+        sx={{ mt: 5, mb: 5 }}
+        onClick={handleLogin}
+        variant="contained"
+        color={isLoggedIn ? "success" : "primary"}
+      >
+        {!isLoggedIn ? "Login to Spotify" : "Connected to Spotify"}
       </Button>
       <SearchBar onSearch={handleSearch} />
       {showAlert && (
@@ -240,14 +221,14 @@ function App() {
         </Box>
       )}
       <Grid container spacing={2} justifyContent="center">
-        <Grid item xs={5}>
+        <Grid item xs={4}>
           <SearchResults
             results={searchResults}
             playlistTracks={playlistTracks}
             addTrack={addingTrack}
           />
         </Grid>
-        <Grid item xs={5}>
+        <Grid item xs={4}>
           <Playlist
             playlistName={playlistName}
             setPlaylistName={setPlaylistName}

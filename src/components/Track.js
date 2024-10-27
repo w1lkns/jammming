@@ -33,9 +33,14 @@ function Track({
         backgroundColor: "#1DB954",
         color: "#FFF",
         display: "flex",
-        flexDirection: { xs: "column-reverse", sm: "row" },
+        alignItems: "center",
+        flexDirection: {
+          xs: "column-reverse",
+          sm: "column-reverse",
+          md: "row",
+        },
         height: { xs: "auto", sm: "auto", md: "auto" },
-        width: { xs: "auto", sm: "auto", md: "auto" },
+        width: { xs: "auto", sm: "auto", md: 525 },
         margin: { xs: 1, sm: 2, md: 2 },
       }}
     >
@@ -62,9 +67,13 @@ function Track({
         <CardContent>
           <Typography
             component="div"
-            variant="h6"
-            noWrap={false} // Allow wrapping
-            overflow="hidden" // Hide overflow
+            sx={{
+              maxWidth: 300,
+              fontSize: { xs: '0.7rem', sm: '0.9rem', md: '1.1rem' },
+              overflowWrap: "break-word",
+              wordBreak: "break-word",
+              hyphens: "auto"
+            }}
           >
             {name}
           </Typography>

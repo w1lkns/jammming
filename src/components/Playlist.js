@@ -52,6 +52,7 @@ const Playlist = ({
           type="submit"
           sx={{ mt: 5, mb: 5 }}
           variant="contained"
+          color="success"
         >
           SAVE TO SPOTIFY
         </Button>
